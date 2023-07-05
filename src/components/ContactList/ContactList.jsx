@@ -1,10 +1,19 @@
 import React from 'react';
 import { ContactListContainer, Title } from './ContactList.styled';
 import { useSelector } from 'react-redux';
+import { deleteContact } from 'redux/operations';
+import { useDispatch } from 'react-redux';
+
+  // import { deleteContact } from 'redux/contactsSlice';
 
 const ContactList = () => {
   const contacts = useSelector(state => state.contacts.contacts);
   console.log(contacts);
+
+  const dispatch = useDispatch();
+    const onDeleteContact = id => dispatch(deleteContact(id));
+ 
+
 
   return (
     <ContactListContainer>
@@ -15,7 +24,7 @@ const ContactList = () => {
 
             <p>{name}</p>
             <p>{number}</p>
-
+            <button type="button" onClick={() => onDeleteContact(id)}>Delete</button>
           </li>
         ))}
 
