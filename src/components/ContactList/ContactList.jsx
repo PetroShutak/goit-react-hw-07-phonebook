@@ -7,11 +7,6 @@ const ContactList = () => {
   const contacts = useSelector(state => state.contacts.contacts);
   const dispatch = useDispatch();
 
-  const onDeleteContact = async id => {
-    await dispatch(deleteContact(id));
-    dispatch(fetchContacts()); 
-  };
-
   useEffect(() => {
     dispatch(fetchContacts()); 
   }, [dispatch]);
@@ -20,11 +15,11 @@ const ContactList = () => {
     <ContactListContainer>
       <Title>Contact List</Title>
       <ul>
-        {contacts.map(({ id, name, number }) => (
+        {contacts.map(({ id, name, phone }) => (
           <li key={id}>
             <p>{name}</p>
-            <p>{number}</p>
-            <button type="button" onClick={() => onDeleteContact(id)}>
+            <p>{phone}</p>
+            <button type="button" onClick={() => dispatch(deleteContact(id))}>
               Delete
             </button>
           </li>

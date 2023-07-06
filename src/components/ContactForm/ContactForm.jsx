@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { nanoid } from '@reduxjs/toolkit';
-import PropTypes from 'prop-types';
 import { Form, Label, Input, Button } from './ContactForm.styled';
 import { useDispatch } from 'react-redux';
-import { addContact, fetchContacts } from '../../redux/operations';
-
+import { fetchContacts, addContact } from '../../redux/operations';
 
 const ContactForm = () => {
-
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setNumber] = useState('');
 
   const handleInputChange = event => {
     const { name, value } = event.currentTarget;
@@ -24,8 +20,7 @@ const ContactForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(addContact({ id: nanoid(), name, number }));
-    dispatch(fetchContacts()); 
+    dispatch(addContact({ name, phone }));
     reset();
   };
 
@@ -33,12 +28,9 @@ const ContactForm = () => {
     setName('');
     setNumber('');
   };
-  
-
 
   return (
     <section>
-      
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="name">Name:</Label>
         <Input
@@ -57,7 +49,7 @@ const ContactForm = () => {
           pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
-          value={number}
+          value={phone}
           onChange={handleInputChange}
         />
         <br />
@@ -65,12 +57,6 @@ const ContactForm = () => {
       </Form>
     </section>
   );
-};
-
-ContactForm.propTypes = {
-  name: PropTypes.string,
-  number: PropTypes.string,
-  onSubmit: PropTypes.func,
 };
 
 export default ContactForm;
