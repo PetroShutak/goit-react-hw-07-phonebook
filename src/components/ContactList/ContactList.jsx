@@ -1,8 +1,9 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { ContactListContainer, Title } from './ContactList.styled';
 import { useSelector } from 'react-redux';
 import { deleteContact } from 'redux/operations';
 import { useDispatch } from 'react-redux';
+import { fetchContacts } from 'redux/operations';
 
   // import { deleteContact } from 'redux/contactsSlice';
 
@@ -11,9 +12,12 @@ const ContactList = () => {
   console.log(contacts);
 
   const dispatch = useDispatch();
-    const onDeleteContact = id => dispatch(deleteContact(id));
- 
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
+  
+  
 
   return (
     <ContactListContainer>
@@ -24,7 +28,9 @@ const ContactList = () => {
 
             <p>{name}</p>
             <p>{number}</p>
-            <button type="button" onClick={() => onDeleteContact(id)}>Delete</button>
+            <button type="button" 
+            onClick={() => dispatch(deleteContact(id))}
+            >Delete</button>
           </li>
         ))}
 
