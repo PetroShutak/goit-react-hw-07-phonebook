@@ -25,7 +25,7 @@ const ContactForm = () => {
   const handleSubmit = event => {
     event.preventDefault();
     dispatch(addContact({ id: nanoid(), name, number }));
-    dispatch(fetchContacts()); // Оновити список контактів після додавання
+    dispatch(fetchContacts()); 
     reset();
   };
 

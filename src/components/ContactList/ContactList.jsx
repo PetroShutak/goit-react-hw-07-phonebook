@@ -9,11 +9,11 @@ const ContactList = () => {
 
   const onDeleteContact = async id => {
     await dispatch(deleteContact(id));
-    dispatch(fetchContacts()); // Оновити список контактів після видалення
+    dispatch(fetchContacts()); 
   };
 
   useEffect(() => {
-    dispatch(fetchContacts()); // Завантажити список контактів під час монтування компонента
+    dispatch(fetchContacts()); 
   }, [dispatch]);
 
   return (
