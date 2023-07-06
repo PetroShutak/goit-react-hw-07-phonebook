@@ -8,9 +8,14 @@ export const conctactsSlice = createSlice({
     contacts: [],
     isLoading: false,
     error: null,
+    deleteConfirmation: null,
   },
 
-  reducers: {},
+  reducers: {
+    setDeleteConfirmation: (state, action) => {
+      state.deleteConfirmation = action.payload;
+    },
+  },
 
   extraReducers: {
     [fetchContacts.pending](state) {
@@ -40,14 +45,18 @@ export const conctactsSlice = createSlice({
     },
 
     [deleteContact.pending](state) {
-      state.isLoading = true;
+      if (!state.deleteConfirmation) {
+        state.isLoading = true;
+      }
     },
     [deleteContact.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.contacts = state.contacts.filter(
-        contact => contact.id !== action.payload
-      );
+      if (!state.deleteConfirmation) {
+        state.isLoading = false;
+        state.error = null;
+        state.contacts = state.contacts.filter(
+          contact => contact.id !== action.payload
+        );
+      }
     },
     [deleteContact.rejected](state, action) {
       state.isLoading = false;
@@ -56,4 +65,5 @@ export const conctactsSlice = createSlice({
   },
 });
 
+export const { setDeleteConfirmation } = conctactsSlice.actions;
 export default conctactsSlice.reducer;
