@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
-
-
-
 import PropTypes from 'prop-types';
 import { Form, Label, Input, Button } from './ContactForm.styled';
 import { useDispatch } from 'react-redux';
@@ -27,13 +24,8 @@ const ContactForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(
-      addContact({
-        id: nanoid(),
-        name,
-        number,
-      }),
-    );
+    dispatch(addContact({ id: nanoid(), name, number }));
+    dispatch(fetchContacts()); // Оновити список контактів після додавання
     reset();
   };
 
