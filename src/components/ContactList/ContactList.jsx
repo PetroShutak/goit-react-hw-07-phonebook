@@ -3,10 +3,11 @@ import { ContactListContainer, Title } from './ContactList.styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchContacts } from 'redux/operations';
 import ContactItem from 'components/ContactItem/ContactItem';
+import { getContacts, getStatusFilter } from 'redux/selectors';
 
 const ContactList = () => {
-  const contacts = useSelector(state => state.contacts.contacts);
-  const filter = useSelector(state => state.filter);
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getStatusFilter);
   const dispatch = useDispatch();
 
   useEffect(() => {

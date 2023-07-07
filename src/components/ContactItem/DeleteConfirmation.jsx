@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import { deleteContact } from 'redux/operations';
 import styled from 'styled-components';
 
@@ -35,6 +36,9 @@ const DeleteConfirmation = ({ contact, onCancel }) => {
 
   const handleConfirmDelete = () => {
     dispatch(deleteContact(contact.id));
+    if (deleteContact) {
+      toast.success(`${contact.name} deleted`);
+    }
     onCancel();
   };
 

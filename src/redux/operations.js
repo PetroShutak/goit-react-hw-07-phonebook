@@ -1,14 +1,3 @@
-// Використовуй функцію createAsyncThunk для оголошення асинхронних генераторів екшенів та виконання HTTP-запитів.
-// Обробку екшенів та зміну даних у стані Redux зроби за допомогою createSlice.
-
-// Оголоси наступні операції:
-
-// fetchContacts - одержання масиву контактів (метод GET) запитом. Базовий тип екшену "contacts/fetchAll".
-// addContact - додавання контакту (метод POST). Базовий тип екшену "contacts/addContact".
-// deleteContact - видалення контакту (метод DELETE). Базовий тип екшену "contacts/deleteContact".
-
-// https://64a45e5ac3b509573b57718f.mockapi.io/contacts/
-
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
