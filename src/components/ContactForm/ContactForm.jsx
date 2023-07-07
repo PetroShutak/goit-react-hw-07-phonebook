@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts, addContact } from '../../redux/operations';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getContacts } from 'redux/selectors';
+import { getContacts, getError } from 'redux/selectors';
 
 const notify = {
   error: message => toast.error(message),
@@ -16,6 +16,7 @@ const ContactForm = () => {
   const [phone, setNumber] = useState('');
 
   const contacts = useSelector(getContacts);
+  const error = useSelector(getError);
 
   const handleInputChange = event => {
     const { name, value } = event.currentTarget;
@@ -40,8 +41,13 @@ const ContactForm = () => {
         return;
       }
 
+      if(error) {
+        notify.error('problem with server');
+        return;
+      }
+
       dispatch(addContact({ name, phone }));
-      notify.success(`${name} added to contacts`);
+      notify.success(`${name} adding to contacts`);
       reset();
     }
   };
@@ -54,6 +60,8 @@ const ContactForm = () => {
   return (
     <section>
       <ToastContainer />
+      
+      {error && <p>Failed to load contacts. Please try again later.</p>}
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="name">Name:</Label>
         <Input

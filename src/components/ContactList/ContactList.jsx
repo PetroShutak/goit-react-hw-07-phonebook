@@ -3,11 +3,12 @@ import { ContactListContainer, Title } from './ContactList.styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchContacts } from 'redux/operations';
 import ContactItem from 'components/ContactItem/ContactItem';
-import { getContacts, getStatusFilter } from 'redux/selectors';
+import { getContacts, getStatusFilter, getIsLoading } from 'redux/selectors';
 
 const ContactList = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getStatusFilter);
+  const isLoading = useSelector(getIsLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,17 +22,17 @@ const ContactList = () => {
   return (
     <ContactListContainer>
       <Title>Contact List</Title>
-      <ul>
+      <ol>
         {filteredContacts.map(contact => (
           <ContactItem key={contact.id} contact={contact} />
         ))}
-      </ul>
+      </ol>
+      {isLoading && <p>update list...</p>}
     </ContactListContainer>
   );
 };
 
 export default ContactList;
-
 
 // import React, { useEffect } from 'react';
 // import { ContactListContainer, Title } from './ContactList.styled';
@@ -43,7 +44,7 @@ export default ContactList;
 //   const dispatch = useDispatch();
 
 //   useEffect(() => {
-//     dispatch(fetchContacts()); 
+//     dispatch(fetchContacts());
 //   }, [dispatch]);
 
 //   return (

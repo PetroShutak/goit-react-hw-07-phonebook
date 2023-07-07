@@ -14,10 +14,11 @@ const ContactItem = ({ contact }) => {
   };
 
   return (
-    <div style = {{
+    <li style = {{
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
+      margin: '10px',
     }}>
       <span>{contact.name}</span>
       <span>{contact.phone}</span>
@@ -26,7 +27,7 @@ const ContactItem = ({ contact }) => {
       {isConfirmingDelete && (
         <DeleteConfirmation contact={contact} onCancel={handleCancelDelete} />
       )}
-    </div>
+    </li>
   );
 };
 
