@@ -25,4 +25,8 @@ export const Button = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  &:hover {
+    scale: 1.1;
+    box-shadow: 0 0 5px 0 #000;
+  }
 `;

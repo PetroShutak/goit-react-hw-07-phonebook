@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from 'redux/operations';
 import { getError, getIsLoading } from 'redux/selectors';
 import Loader from 'components/Loader/Loader';
+import Footer from './Footer/Footer';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ export const App = () => {
   }, [dispatch]);
 
   return (
+    <>
     <Container>
       {isLoading && !error && <Loader />}
       <Title>PnoneBook</Title>
@@ -27,5 +29,7 @@ export const App = () => {
       <Filter />
       <ContactList />
     </Container>
+    <Footer />
+    </>
   );
 };
