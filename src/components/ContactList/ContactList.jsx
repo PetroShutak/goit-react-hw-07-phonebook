@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ContactListContainer, Title } from './ContactList.styled';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchContacts } from 'redux/operations';
+import { useSelector } from 'react-redux';
+
 import ContactItem from 'components/ContactItem/ContactItem';
 import { getContacts, getStatusFilter, getIsLoading } from 'redux/selectors';
 
@@ -9,11 +9,6 @@ const ContactList = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getStatusFilter);
   const isLoading = useSelector(getIsLoading);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
 
   const filteredContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
