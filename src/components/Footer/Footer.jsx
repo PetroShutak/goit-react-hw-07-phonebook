@@ -6,6 +6,8 @@ const Footer = () => {
       <p className={css.footer__text}>
         © 2023 Phonebook. All rights reserved. Created by{' '}
         <a
+          rel="noreferrer"
+          target="_blank"
           className={css.footer__link}
           href="https://www.linkedin.com/in/petroshutak/"
         >
